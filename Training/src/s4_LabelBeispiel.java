@@ -34,7 +34,7 @@ public class s4_LabelBeispiel extends JFrame {
      label6.setBorder(BorderFactory.createEtchedBorder());
      label6.setVerticalTextPosition(JLabel.TOP);
      label6.setIconTextGap(4);
-     
+     System.out.println("userdir: " + System.getProperty("user.dir"));
      JLabel label7=new JLabel("Label 7 JLabel Right",new ImageIcon(System.getProperty("user.dir")+"/src/icons/"+"book_icon2.png"),JLabel.RIGHT);
      label7.setBorder(BorderFactory.createEtchedBorder());
      label7.setVerticalTextPosition(JLabel.BOTTOM);

@@ -1,3 +1,5 @@
+import static java.awt.GraphicsDevice.WindowTranslucency.PERPIXEL_TRANSPARENT;
+
 import java.awt.FlowLayout;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
@@ -28,10 +30,20 @@ public class s2_WindowMitShape extends JFrame implements MouseListener {
 		boolean isShapedWindowSupported = gd
 				.isWindowTranslucencySupported(GraphicsDevice.WindowTranslucency.PERPIXEL_TRANSPARENT);
 
-		if (!isUniformTranslucencySupported || !isShapedWindowSupported) {
-			System.out.println("Shaped Window not allowed");
-			System.exit(0);
-		}
+
+        //If shaped windows aren't supported, exit.
+        if (!isShapedWindowSupported) {
+            System.err.println("Shaped windows are not supported");
+            System.exit(0);
+        }
+
+        //If translucent windows aren't supported, 
+        //create an opaque window.
+        if (!isUniformTranslucencySupported) {
+            System.out.println(
+                "Translucency is not supported, creating an opaque window");
+        }
+
 
 		this.setResizable(false);
 		this.getContentPane().setLayout(new FlowLayout());
@@ -72,8 +84,11 @@ public class s2_WindowMitShape extends JFrame implements MouseListener {
 		Rectangle umschiessendesrechtecke2 = pentagon.getBounds();
 
 		// Fenster mittig auf Bildschirm platzieren
-		// this.setLocationRelativeTo(null);
-		this.setOpacity((float) 0.8);
+		this.setLocationRelativeTo(null);
+	    if (isUniformTranslucencySupported) {
+	    	this.setOpacity((float) 0.8);
+        }
+		
 
 		this.setVisible(true);
 		// Fenster muss so gro� sein, damit das Dreieck vollst�ndig dargestellt
